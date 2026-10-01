@@ -117,6 +117,8 @@
     .philosophy .wrap > div:last-child{ padding:1.4rem; justify-self:stretch; max-width:none; }
   }
 
+
+  .back-portfolio{ position:fixed; left:14px; bottom:calc(14px + env(safe-area-inset-bottom,0px)); z-index:90; background:var(--navy); color:var(--cream); font:600 .85rem var(--body); text-decoration:none; padding:.6rem 1rem; border-radius:999px; box-shadow:0 10px 24px -10px rgba(23,34,62,.6); }
   /* Puntero: flecha lima con contorno azul marino */
   html, body{ cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><path d='M4 2.5 L4 25 L10 19.5 L14.2 28.5 L18.4 26.6 L14.3 17.8 L22.5 17.6 Z' fill='%23DCE27A' stroke='%2317223E' stroke-width='2' stroke-linejoin='round'/></svg>") 4 2, auto; }
   a, button, .btn, summary, [role="button"], label, select{ cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><path d='M4 2.5 L4 25 L10 19.5 L14.2 28.5 L18.4 26.6 L14.3 17.8 L22.5 17.6 Z' fill='%23C9D15A' stroke='%2317223E' stroke-width='2' stroke-linejoin='round'/></svg>") 4 2, pointer; }
@@ -737,6 +739,16 @@
   }).observe(document.body, { childList:true, subtree:true, characterData:true });
   btn.addEventListener('click', () => { lang = lang === 'es' ? 'en' : 'es'; try{ localStorage.setItem('plop-lang', lang); }catch(e){} apply(); });
   apply();
+})();
+</script>
+<script>
+/* Botón para volver al portfolio (solo cuando se abre desde el portfolio en el celular) */
+(function(){
+  if(!/[?&]from=portfolio/.test(location.search)) return;
+  const a = document.createElement('a');
+  a.href = '../'; a.className = 'back-portfolio'; a.textContent = '← Portfolio';
+  a.addEventListener('click', e => { if(history.length > 1){ e.preventDefault(); history.back(); } });
+  document.body.appendChild(a);
 })();
 </script>
 <script id="doypack-scene">
