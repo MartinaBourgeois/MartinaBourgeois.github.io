@@ -612,6 +612,8 @@
   document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
   // Proyecto web: abre el sitio real de Plop para scrollearlo con todos sus efectos
   function openSite(){
+    // En celular/tablet: abre el sitio en pantalla completa (más fluido y compatible que una ventana dentro de otra)
+    if(window.matchMedia('(max-width: 820px), (pointer: coarse)').matches){ window.location.href = 'plop/index.html?from=portfolio'; return; }
     const v = document.getElementById('site-viewer'), f = document.getElementById('site-frame');
     if(!f.getAttribute('src')) f.setAttribute('src', 'plop/index.html');
     v.classList.add('open'); document.body.style.overflow = 'hidden';
